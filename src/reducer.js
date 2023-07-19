@@ -1,45 +1,26 @@
-import { ENTER_SYSTEM, SET_NAME, SET_AGE, EXIT_SYSTEM } from './actions';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  step: 1,
   name: '',
   age: '',
-  showLoader: false,
-  countdown: 5
 };
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ENTER_SYSTEM:
-      return {
-        ...state,
-        step: 2,
-        showLoader: true
-      };
-    case SET_NAME:
-      return {
-        ...state,
-        name: action.payload
-      };
-    case SET_AGE:
-      return {
-        ...state,
-        age: action.payload,
-        showLoader: true,
-        countdown: 5
-      };
-    case EXIT_SYSTEM:
-      return {
-        ...state,
-        step: state.step + 1,
-        showLoader: false,
-        countdown: 5
-      };
-    default:
-      return state;
-  }
-};
+const studentSlice = createSlice({
+  name: 'student',
+  initialState,
+  reducers: {
+    setName: (state, action) => {
+      state.name = action.payload;
+    },
+    setAge: (state, action) => {
+      state.age = action.payload;
+    },
+  },
+});
 
-export default reducer;
+export const { setName, setAge } = studentSlice.actions;
+export default studentSlice.reducer;
+
+
 
   
